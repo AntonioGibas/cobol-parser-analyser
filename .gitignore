@@ -1,0 +1,10 @@
+# Ignoriraj Python privremene datoteke
+__pycache__/
+*.pyc
+
+# Ignoriraj izlazne JSON rezultate (to generiramo, ne spremamo u git)
+output/
+
+# Sistemske datoteke
+.DS_Store
+.vscode/
