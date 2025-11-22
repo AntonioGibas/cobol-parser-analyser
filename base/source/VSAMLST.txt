@@ -1,0 +1,85 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. VSAMLST.
+       AUTHOR.     Z26069.
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT CHAMPION-VSAM ASSIGN TO INFL
+                  ORGANIZATION IS INDEXED
+                  ACCESS MODE IS SEQUENTIAL
+                  RECORD KEY IS CHAMP-NAME
+                  FILE STATUS IS VSAM-STATUS.
+       DATA DIVISION.
+       FILE SECTION.
+       FD CHAMPION-VSAM.
+           COPY DETALJ01.
+
+       WORKING-STORAGE SECTION.
+       01 VSAM-STATUS     PIC XX.
+           88 VSAM-OK      VALUE "00".
+           88 VSAM-EOF     VALUE "10".
+
+       01 EOF-FLAG        PIC X VALUE 'N'.
+           88 END-OF-FILE  VALUE 'Y'.
+
+       01 RECORD-COUNTER  PIC 9(5) VALUE ZEROS.
+
+       PROCEDURE DIVISION.
+       MAIN-PARAGRAPH.
+           DISPLAY "STARTING VSAM READ PROGRAM".
+
+           OPEN INPUT CHAMPION-VSAM.
+           IF NOT VSAM-OK
+              PERFORM VSAM-ERROR-PARA
+           END-IF.
+
+           PERFORM READ-NEXT-RECORD.
+
+           PERFORM UNTIL END-OF-FILE
+               PERFORM DISPLAY-RECORD THROUGH DISPLAY-RECORD-EXIT
+               PERFORM READ-NEXT-RECORD
+           END-PERFORM.
+
+           DISPLAY "TOTAL RECORDS READ: " RECORD-COUNTER.
+
+           CLOSE CHAMPION-VSAM.
+           DISPLAY "PROGRAM TERMINATED".
+           STOP RUN.
+
+       READ-NEXT-RECORD.
+           READ CHAMPION-VSAM NEXT
+               AT END
+                   SET END-OF-FILE TO TRUE
+               NOT AT END
+                   ADD 1 TO RECORD-COUNTER
+           END-READ.
+
+           IF NOT VSAM-OK AND NOT VSAM-EOF
+               DISPLAY "ERROR READING VSAM FILE: " VSAM-STATUS
+               SET END-OF-FILE TO TRUE
+           END-IF.
+
+
+       DISPLAY-RECORD.
+           DISPLAY "RECORD #" RECORD-COUNTER.
+           DISPLAY "CHAMPION NAME: " CHAMP-NAME.
+           DISPLAY "BASE HP: " BASE-HP.
+           DISPLAY "BASE MANA: " BASE-MANA.
+           DISPLAY "BASE AD: " BASE-AD.
+           DISPLAY "BASE AS: " BASE-AS.
+           DISPLAY "PASSIVE DESCRIPTION: " PASSIVE-DESC.
+           DISPLAY "Q DESCRIPTION: " Q-DESC.
+           DISPLAY "W DESCRIPTION: " W-DESC.
+           DISPLAY "E DESCRIPTION: " E-DESC.
+           DISPLAY "R DESCRIPTION: " R-DESC.
+           DISPLAY "RESOURCE TYPE: " RESOURCE-TYPE.
+           DISPLAY "----------------------------------------".
+
+       DISPLAY-RECORD-EXIT.
+           EXIT.
+
+       VSAM-ERROR-PARA.
+           DISPLAY "ERROR OPENING VSAM FILE: " VSAM-STATUS
+           CLOSE CHAMPION-VSAM.
+           DISPLAY "PROGRAM TERMINATED".
+           STOP RUN.

@@ -1,0 +1,31 @@
+Ahri                           Ionia                Mage            Mid         AP
+Zed                            Ionia                Assassin        Mid         AD
+Annie                          Runeterra            Mage            Mid         AP
+Brand                          Runeterra            Mage            Mid         AP
+Corki                          Bandle City          Marksman        Mid         Hybrid
+Diana                          Mount Targon         Fighter         Mid         AP
+Fizz                           Bilgewater           Assassin        Mid         AP
+Galio                          Demacia              Tank            Mid         AP
+Heimerdinger                   Piltover             Mage            Mid         AP
+Kassadin                       Void                 Assassin        Mid         AP
+Katarina                       Noxus                Assassin        Mid         AP
+LeBlanc                        Noxus                Assassin        Mid         AP
+Lux                            Demacia              Mage            Mid         AP
+Malzahar                       Void                 Mage            Mid         AP
+Orianna                        Piltover             Mage            Mid         AP
+Pantheon                       Mount Targon         Fighter         Mid         AD
+Qiyana                         Ixtal                Assassin        Mid         AD
+Ryze                           Runeterra            Mage            Mid         AP
+Swain                          Noxus                Mage            Mid         AP
+Syndra                         Ionia                Mage            Mid         AP
+Taliyah                        Shurima              Mage            Mid         AP
+Talon                          Noxus                Assassin        Mid         AD
+Twisted Fate                   Bilgewater           Mage            Mid         AP
+Veigar                         Bandle City          Mage            Mid         AP
+Vel'Koz                        Void                 Mage            Mid         AP
+Viktor                         Zaun                 Mage            Mid         AP
+Vladimir                       Noxus                Mage            Mid         AP
+Xerath                         Shurima              Mage            Mid         AP
+Yasuo                          Ionia                Fighter         Mid         AD
+Ziggs                          Zaun                 Mage            Mid         AP
+Zilean                         Runeterra            Support         Mid         AP

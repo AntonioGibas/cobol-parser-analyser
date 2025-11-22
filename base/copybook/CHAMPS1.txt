@@ -1,0 +1,13 @@
+       01  CHAMPIONS.
+           05 CHAMPION-NAME          PIC X(30).
+           05 FILLER                 PIC X VALUE SPACE.
+           05 REGION                 PIC X(20).
+           05 FILLER                 PIC X VALUE SPACE.
+           05 CHAMPION-TYPE          PIC X(15).
+           05 FILLER                 PIC X VALUE SPACE.
+           05 ROLE                   PIC X(10).
+           05 FILLER                 PIC X VALUE SPACE.
+           05 PRIMARY-STAT           PIC X(10).
+           05 FILLER                 PIC X VALUE SPACE.
+           05 RANGE-TYPE             PIC X(6).
+           05 FILLER                 PIC X(4) VALUE SPACE.

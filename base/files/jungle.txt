@@ -1,0 +1,26 @@
+Elise                          Shadow Isles         Mage            Jungle      AP
+Evelynn                        Runeterra            Assassin        Jungle      AP
+Fiddlesticks                   Runeterra            Mage            Jungle      AP
+Gragas                         Freljord             Fighter         Jungle      AP
+Graves                         Bilgewater           Marksman        Jungle      AD
+Hecarim                        Shadow Isles         Fighter         Jungle      AD
+Jarvan IV                      Demacia              Fighter         Jungle      AD
+Karthus                        Shadow Isles         Mage            Jungle      AP
+Kha'Zix                        Void                 Assassin        Jungle      AD
+Lee Sin                        Ionia                Fighter         Jungle      AD
+Master Yi                      Ionia                Assassin        Jungle      AD
+Nidalee                        Ixtal                Assassin        Jungle      AP
+Nocturne                       Runeterra            Assassin        Jungle      AD
+Nunu & Willump                 Freljord             Tank            Jungle      AP
+Olaf                           Freljord             Fighter         Jungle      AD
+Rammus                         Shurima              Tank            Jungle      AP
+Rengar                         Ixtal                Assassin        Jungle      AD
+Sejuani                        Freljord             Tank            Jungle      AP
+Shaco                          Runeterra            Assassin        Jungle      AD
+Shyvana                        Demacia              Fighter         Jungle      AD
+Skarner                        Shurima              Fighter         Jungle      AP
+Trundle                        Freljord             Fighter         Jungle      AD
+Udyr                           Freljord             Fighter         Jungle      Hybrid
+Vi                             Piltover             Fighter         Jungle      AD
+Warwick                        Zaun                 Fighter         Jungle      AD
+Xin Zhao                       Demacia              Fighter         Jungle      AD

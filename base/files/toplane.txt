@@ -1,0 +1,29 @@
+Garen                          Demacia              Fighter         Top         AD
+Cho'Gath                       Void                 Tank            Top         AP
+Darius                         Noxus                Fighter         Top         AD
+Dr. Mundo                      Zaun                 Fighter         Top         AP
+Fiora                          Demacia              Fighter         Top         AD
+Gangplank                      Bilgewater           Fighter         Top         AD
+Irelia                         Ionia                Fighter         Top         AD
+Jax                            Runeterra            Fighter         Top         Hybrid
+Jayce                          Piltover             Fighter         Top         AD
+Kayle                          Demacia              Fighter         Top         Hybrid
+Kennen                         Ionia                Mage            Top         AP
+Malphite                       Ixtal                Tank            Top         AP
+Maokai                         Shadow Isles         Tank            Top         AP
+Mordekaiser                    Noxus                Fighter         Top         AP
+Nasus                          Shurima              Fighter         Top         AD
+Poppy                          Demacia              Tank            Top         AD
+Quinn                          Demacia              Marksman        Top         AD
+Renekton                       Shurima              Fighter         Top         AD
+Riven                          Noxus                Fighter         Top         AD
+Rumble                         Bandle City          Fighter         Top         AP
+Shen                           Ionia                Tank            Top         AP
+Singed                         Zaun                 Tank            Top         AP
+Sion                           Noxus                Tank            Top         AD
+Teemo                          Bandle City          Marksman        Top         AP
+Tryndamere                     Freljord             Fighter         Top         AD
+Urgot                          Noxus                Fighter         Top         AD
+Volibear                       Freljord             Fighter         Top         AP
+Wukong                         Ionia                Fighter         Top         AD
+Yorick                         Shadow Isles         Fighter         Top         AD

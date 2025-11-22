@@ -1,0 +1,115 @@
+Ahri                           Ionia                Mage            Mid         AP                                                  
+Garen                          Demacia              Fighter         Top         AD                                                  
+Ezreal                         Piltover             Marksman        Bot         AD                                                  
+Leona                          Mount Targon         Tank            Support     AP                                                  
+Zed                            Ionia                Assassin        Mid         AD                                                  
+Alistar                        Runeterra            Tank            Support     AP                             
+Annie                          Runeterra            Mage            Mid         AP                             
+Ashe                           Freljord             Marksman        Bot         AD                             
+Blitzcrank                     Zaun                 Tank            Support     AP                             
+Brand                          Runeterra            Mage            Mid         AP                             
+Caitlyn                        Piltover             Marksman        Bot         AD                             
+Cho'Gath                       Void                 Tank            Top         AP                             
+Corki                          Bandle City          Marksman        Mid         Hybrid                             
+Darius                         Noxus                Fighter         Top         AD                             
+Diana                          Mount Targon         Fighter         Mid         AP                             
+Dr. Mundo                      Zaun                 Fighter         Top         AP                             
+Draven                         Noxus                Marksman        Bot         AD                             
+Elise                          Shadow Isles         Mage            Jungle      AP                             
+Evelynn                        Runeterra            Assassin        Jungle      AP                             
+Fiddlesticks                   Runeterra            Mage            Jungle      AP                             
+Fiora                          Demacia              Fighter         Top         AD                             
+Fizz                           Bilgewater           Assassin        Mid         AP                             
+Galio                          Demacia              Tank            Mid         AP                             
+Gangplank                      Bilgewater           Fighter         Top         AD                             
+Gragas                         Freljord             Fighter         Jungle      AP                             
+Graves                         Bilgewater           Marksman        Jungle      AD                             
+Hecarim                        Shadow Isles         Fighter         Jungle      AD                             
+Heimerdinger                   Piltover             Mage            Mid         AP                             
+Irelia                         Ionia                Fighter         Top         AD                             
+Janna                          Zaun                 Support         Support     AP                             
+Jarvan IV                      Demacia              Fighter         Jungle      AD                             
+Jax                            Runeterra            Fighter         Top         Hybrid
+Jayce                          Piltover             Fighter         Top         AD
+Jinx                           Zaun                 Marksman        Bot         AD
+Karma                          Ionia                Mage            Support     AP
+Karthus                        Shadow Isles         Mage            Jungle      AP
+Kassadin                       Void                 Assassin        Mid         AP
+Katarina                       Noxus                Assassin        Mid         AP
+Kayle                          Demacia              Fighter         Top         Hybrid
+Kennen                         Ionia                Mage            Top         AP
+Kha'Zix                        Void                 Assassin        Jungle      AD
+Kog'Maw                        Void                 Marksman        Bot         Hybrid
+LeBlanc                        Noxus                Assassin        Mid         AP
+Lee Sin                        Ionia                Fighter         Jungle      AD
+Lulu                           Bandle City          Support         Support     AP
+Lux                            Demacia              Mage            Mid         AP
+Malphite                       Ixtal                Tank            Top         AP
+Malzahar                       Void                 Mage            Mid         AP
+Maokai                         Shadow Isles         Tank            Top         AP
+Master Yi                      Ionia                Assassin        Jungle      AD
+Miss Fortune                   Bilgewater           Marksman        Bot         AD
+Mordekaiser                    Noxus                Fighter         Top         AP
+Morgana                        Demacia              Mage            Support     AP
+Nami                           Runeterra            Support         Support     AP
+Nasus                          Shurima              Fighter         Top         AD
+Nautilus                       Bilgewater           Tank            Support     AP
+Nidalee                        Ixtal                Assassin        Jungle      AP
+Nocturne                       Runeterra            Assassin        Jungle      AD
+Nunu & Willump                 Freljord             Tank            Jungle      AP
+Olaf                           Freljord             Fighter         Jungle      AD
+Orianna                        Piltover             Mage            Mid         AP
+Pantheon                       Mount Targon         Fighter         Mid         AD
+Poppy                          Demacia              Tank            Top         AD
+Pyke                           Bilgewater           Support         Support     AD
+Qiyana                         Ixtal                Assassin        Mid         AD
+Quinn                          Demacia              Marksman        Top         AD
+Rammus                         Shurima              Tank            Jungle      AP
+Renekton                       Shurima              Fighter         Top         AD
+Rengar                         Ixtal                Assassin        Jungle      AD
+Riven                          Noxus                Fighter         Top         AD
+Rumble                         Bandle City          Fighter         Top         AP
+Ryze                           Runeterra            Mage            Mid         AP
+Sejuani                        Freljord             Tank            Jungle      AP
+Shaco                          Runeterra            Assassin        Jungle      AD
+Shen                           Ionia                Tank            Top         AP
+Shyvana                        Demacia              Fighter         Jungle      AD
+Singed                         Zaun                 Tank            Top         AP
+Sion                           Noxus                Tank            Top         AD
+Sivir                          Shurima              Marksman        Bot         AD
+Skarner                        Shurima              Fighter         Jungle      AP
+Sona                           Demacia              Support         Support     AP
+Soraka                         Mount Targon         Support         Support     AP
+Swain                          Noxus                Mage            Mid         AP
+Syndra                         Ionia                Mage            Mid         AP
+Tahm Kench                     Bilgewater           Support         Support     AP
+Taliyah                        Shurima              Mage            Mid         AP
+Talon                          Noxus                Assassin        Mid         AD
+Taric                          Mount Targon         Support         Support     AP
+Teemo                          Bandle City          Marksman        Top         AP
+Thresh                         Shadow Isles         Support         Support     AP
+Tristana                       Bandle City          Marksman        Bot         AD
+Trundle                        Freljord             Fighter         Jungle      AD
+Tryndamere                     Freljord             Fighter         Top         AD
+Twisted Fate                   Bilgewater           Mage            Mid         AP
+Twitch                         Zaun                 Marksman        Bot         AD
+Udyr                           Freljord             Fighter         Jungle      Hybrid
+Urgot                          Noxus                Fighter         Top         AD
+Varus                          Ionia                Marksman        Bot         AD
+Vayne                          Demacia              Marksman        Bot         AD
+Veigar                         Bandle City          Mage            Mid         AP
+Vel'Koz                        Void                 Mage            Mid         AP
+Vi                             Piltover             Fighter         Jungle      AD
+Viktor                         Zaun                 Mage            Mid         AP
+Vladimir                       Noxus                Mage            Mid         AP
+Volibear                       Freljord             Fighter         Top         AP
+Warwick                        Zaun                 Fighter         Jungle      AD
+Wukong                         Ionia                Fighter         Top         AD
+Xerath                         Shurima              Mage            Mid         AP
+Xin Zhao                       Demacia              Fighter         Jungle      AD
+Yasuo                          Ionia                Fighter         Mid         AD
+Yorick                         Shadow Isles         Fighter         Top         AD
+Yuumi                          Bandle City          Support         Support     AP
+Ziggs                          Zaun                 Mage            Mid         AP
+Zilean                         Runeterra            Support         Mid         AP
+Zyra                           Ixtal                Mage            Support     AP

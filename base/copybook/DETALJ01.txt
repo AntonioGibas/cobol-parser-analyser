@@ -1,0 +1,36 @@
+       01  CHAMPION-DETAIL.
+           05 CHAMP-NAME           PIC X(30).
+           05 BASE-HP              PIC 9(4)V99  COMP-3.
+           05 BASE-MANA            PIC 9(4)V99  COMP-3.
+           05 BASE-AD              PIC 9(3)V99  COMP-3.
+           05 BASE-AS              PIC 9(1)V999 COMP-3.
+           05 BASE-ARMOR           PIC 9(3)V99  COMP-3.
+           05 BASE-MR              PIC 9(3)V99  COMP-3.
+           05 BASE-MS              PIC 9(3)     COMP-3.
+           05 HP-GROWTH            PIC 9(2)V99  COMP-3.
+           05 MANA-GROWTH          PIC 9(2)V99  COMP-3.
+           05 AD-GROWTH            PIC 9(2)V99  COMP-3.
+           05 AS-GROWTH            PIC 9(1)V999 COMP-3.
+           05 ARMOR-GROWTH         PIC 9(2)V99  COMP-3.
+           05 MR-GROWTH            PIC 9(2)V99  COMP-3.
+           05 PASSIVE-DESC         PIC X(1250).
+           05 Q-DESC               PIC X(1250).
+           05 W-DESC               PIC X(1250).
+           05 E-DESC               PIC X(1250).
+           05 R-DESC               PIC X(1250).
+           05 P-DAMAGE             PIC 9(5)     COMP.
+           05 Q-DAMAGE             PIC 9(5)     COMP.
+           05 W-DAMAGE             PIC 9(5)     COMP.
+           05 E-DAMAGE             PIC 9(5)     COMP.
+           05 R-DAMAGE             PIC 9(5)     COMP.
+           05 ABILITY-COOLDOWNS.
+              10 Q-COOLDOWN        PIC 9(2)V99  COMP-3.
+              10 W-COOLDOWN        PIC 9(2)V99  COMP-3.
+              10 E-COOLDOWN        PIC 9(2)V99  COMP-3.
+              10 R-COOLDOWN        PIC 9(3)V99  COMP-3.
+           05 ABILITY-COSTS.
+              10 Q-COST            PIC 9(3)     COMP-3.
+              10 W-COST            PIC 9(3)     COMP-3.
+              10 E-COST            PIC 9(3)     COMP-3.
+              10 R-COST            PIC 9(3)     COMP-3.
+           05 RESOURCE-TYPE        PIC X(10).

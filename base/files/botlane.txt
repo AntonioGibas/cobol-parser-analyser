@@ -1,0 +1,29 @@
+Ezreal                         Piltover             Marksman        Bot         AD
+Leona                          Mount Targon         Tank            Support     AP
+Alistar                        Runeterra            Tank            Support     AP
+Ashe                           Freljord             Marksman        Bot         AD
+Blitzcrank                     Zaun                 Tank            Support     AP
+Caitlyn                        Piltover             Marksman        Bot         AD
+Draven                         Noxus                Marksman        Bot         AD
+Janna                          Zaun                 Support         Support     AP
+Jinx                           Zaun                 Marksman        Bot         AD
+Karma                          Ionia                Mage            Support     AP
+Kog'Maw                        Void                 Marksman        Bot         Hybrid
+Lulu                           Bandle City          Support         Support     AP
+Miss Fortune                   Bilgewater           Marksman        Bot         AD
+Morgana                        Demacia              Mage            Support     AP
+Nami                           Runeterra            Support         Support     AP
+Nautilus                       Bilgewater           Tank            Support     AP
+Pyke                           Bilgewater           Support         Support     AD
+Sivir                          Shurima              Marksman        Bot         AD
+Sona                           Demacia              Support         Support     AP
+Soraka                         Mount Targon         Support         Support     AP
+Tahm Kench                     Bilgewater           Support         Support     AP
+Taric                          Mount Targon         Support         Support     AP
+Thresh                         Shadow Isles         Support         Support     AP
+Tristana                       Bandle City          Marksman        Bot         AD
+Twitch                         Zaun                 Marksman        Bot         AD
+Varus                          Ionia                Marksman        Bot         AD
+Vayne                          Demacia              Marksman        Bot         AD
+Yuumi                          Bandle City          Support         Support     AP
+Zyra                           Ixtal                Mage            Support     AP
