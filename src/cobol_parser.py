@@ -1,54 +1,57 @@
 import os
-import re
 import json
+import logging
+from src.config.regex_patterns import COBOL_PATTERNS, IGNORED_PERFORMS
 
-def parse_content(filename, content, logger):
-    rezultat = {
-        "filename": filename,
-        "program_id": "UNKNOWN",
-        "copybooks": [],
-        "calls": [],
-        "performs": [],
-        "status": "OK"
-    }
-    
-    rx_program_id = re.compile(r"PROGRAM-ID\.\s+([\w-]+)", re.IGNORECASE)
-    rx_copy = re.compile(r"COPY\s+([\w-]+)", re.IGNORECASE)
-    rx_call = re.compile(r"CALL\s+['\"]([\w-]+)['\"]", re.IGNORECASE)
-    rx_perform = re.compile(r"PERFORM\s+([\w-]+)", re.IGNORECASE)
-    ignored_performs = ['UNTIL', 'VARYING', 'THROUGH', 'THRU', 'TIMES']
+class CobolParser:
+    def __init__(self, logger=None):
+        self.logger = logger if logger else logging.getLogger(__name__)
+        self.patterns = COBOL_PATTERNS
+        self.ignored_performs = IGNORED_PERFORMS
 
-    lines = content.splitlines()
-    for i, line in enumerate(lines, 1):
-        line = line.strip()
-        if not line or line.startswith('*') or line.startswith('/'):
-            continue
+    def parse_content(self, filename, content):
+        rezultat = {
+            "filename": filename,
+            "program_id": "UNKNOWN",
+            "copybooks": [],
+            "calls": [],
+            "performs": [],
+            "status": "OK"
+        }
+
+        lines = content.splitlines()
+        for i, line in enumerate(lines, 1):
+            line = line.strip()
+            if not line or line.startswith('*') or line.startswith('/'):
+                continue
+
+            if rezultat["program_id"] == "UNKNOWN":
+                match = self.patterns["program_id"].search(line)
+                if match: rezultat["program_id"] = match.group(1)
+
+            match_copy = self.patterns["copy"].search(line)
+            if match_copy: rezultat["copybooks"].append(match_copy.group(1))
+
+            match_call = self.patterns["call"].search(line)
+            if match_call: rezultat["calls"].append(match_call.group(1))
+
+            match_perform = self.patterns["perform"].search(line)
+            if match_perform:
+                p_name = match_perform.group(1).upper()
+                if p_name not in self.ignored_performs and p_name not in rezultat["performs"]:
+                    rezultat["performs"].append(p_name)
 
         if rezultat["program_id"] == "UNKNOWN":
-            match = rx_program_id.search(line)
-            if match: rezultat["program_id"] = match.group(1)
+            self.logger.warning(f"[{filename}] UPOZORENJE: Nije pronadjen PROGRAM-ID.")
+            rezultat["status"] = "WARNING: No ID"
 
-        match_copy = rx_copy.search(line)
-        if match_copy: rezultat["copybooks"].append(match_copy.group(1))
-
-        match_call = rx_call.search(line)
-        if match_call: rezultat["calls"].append(match_call.group(1))
-
-        match_perform = rx_perform.search(line)
-        if match_perform:
-            p_name = match_perform.group(1).upper()
-            if p_name not in ignored_performs and p_name not in rezultat["performs"]:
-                rezultat["performs"].append(p_name)
-
-    if rezultat["program_id"] == "UNKNOWN":
-        logger.warning(f"[{filename}] UPOZORENJE: Nije pronadjen PROGRAM-ID.")
-        rezultat["status"] = "WARNING: No ID"
-
-    return rezultat
+        return rezultat
 
 def pokreni_cobol_parser(source_dir, output_file, logger):
     logger.info(f"--- POCETAK COBOL PARSERA ---")
     logger.info(f"Izvor: {source_dir}")
+    
+    parser = CobolParser(logger)
     
     svi_podaci = []
     valid_extensions = (".cbl", ".cob", ".txt")
@@ -67,7 +70,7 @@ def pokreni_cobol_parser(source_dir, output_file, logger):
                     logger.warning(f"[{filename}] Encoding fallback na latin-1.")
                     with open(filepath, 'r', encoding='latin-1') as f: content = f.read()
 
-                podaci = parse_content(filename, content, logger)
+                podaci = parser.parse_content(filename, content)
                 svi_podaci.append(podaci)
                 logger.info(f"[{filename}] Parsirano uspjesno (ID: {podaci['program_id']})")
 
