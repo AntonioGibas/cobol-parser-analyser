@@ -1,6 +1,7 @@
 import json
 import os
 import re
+from jinja2 import Environment, FileSystemLoader # Novo!
 from src.services.data_io import read_json
 
 def safe_id(text):
@@ -12,7 +13,7 @@ def safe_label(text):
     if not text: return ""
     return text.replace('"', "'").replace('[', '(').replace(']', ')')
 
-def _generate_internal_flow(program_data, output_path):
+def _generate_internal_flow(program_data, internal_dir, template_env, internal_template_name, logger):
     pgm = program_data['program_id']
     performs = program_data['performs']
     
@@ -23,11 +24,9 @@ def _generate_internal_flow(program_data, output_path):
     lines.append("    classDef entry fill:#f9f,stroke:#333,stroke-width:2px,color:black;")
     lines.append("    classDef step fill:#fff,stroke:#333,stroke-width:1px,color:black;")
     
-    # Glavni ulaz programa
     pgm_id = safe_id(pgm)
     lines.append(f'    {pgm_id}["{safe_label(pgm)} ENTRY"]:::entry')
     
-    # Povezivanje ulaza sa svim PERFORMS pozivima
     for perform in performs:
         perform_id = safe_id(f"{pgm}_{perform}")
         lines.append(f'    {perform_id}["{safe_label(perform)}"]')
@@ -35,15 +34,22 @@ def _generate_internal_flow(program_data, output_path):
     
     mermaid_content = "\n".join(lines)
     
-    html = f"""
-    <!DOCTYPE html><html><head><script type='module'>import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';mermaid.initialize({{ startOnLoad: true, securityLevel: 'loose' }});</script></head><body style='background:#f4f4f9; font-family:sans-serif;'><h2>Internal Flow: {pgm}</h2><p><a href='../graph.html'>&lt;&lt; Natrag na glavni graf</a></p><div style='background:white; padding:20px; border-radius:8px;'><pre class='mermaid'>\n{mermaid_content}\n</pre></div></body></html>
-    """
+    # Koristi Jinja2 za renderiranje
+    template = template_env.get_template(internal_template_name)
+    html_content = template.render(
+        program_id=pgm,
+        mermaid_content=mermaid_content,
+        main_graph_path="../graph.html"
+    )
 
-    with open(output_path, 'w', encoding='utf-8') as f:
-        f.write(html)
+    internal_file_path = os.path.join(internal_dir, f"internal_{safe_id(pgm)}.html")
+    with open(internal_file_path, 'w', encoding='utf-8') as f:
+        f.write(html_content)
+    
+    logger.info(f"Interni graf generiran za {pgm}: {internal_file_path}")
 
 
-def pokreni_generator_grafa(jcl_json, cobol_json, html_output_main, html_output_internal_dir, logger):
+def pokreni_generator_grafa(jcl_json, cobol_json, html_output_main, html_output_internal_dir, templates_dir, main_template_name, internal_template_name, logger):
     logger.info("--- POCETAK GENERIRANJA GRAFA ---")
     
     jcl_data = read_json(jcl_json)
@@ -53,19 +59,20 @@ def pokreni_generator_grafa(jcl_json, cobol_json, html_output_main, html_output_
         logger.error("GRESKA: Nema JCL podataka.")
         return
 
+    # Inicijalizacija Jinja2 okruženja
+    file_loader = FileSystemLoader(templates_dir)
+    template_env = Environment(loader=file_loader)
+    
     cobol_map = {item['program_id']: item for item in cobol_data}
     
-    # 1. Priprema i kreiranje interne mape
+    # 1. Priprema i kreiranje interne mape za output
     internal_dir = os.path.join(html_output_internal_dir, "internal")
     if not os.path.exists(internal_dir):
         os.makedirs(internal_dir)
         
     # GENERIRANJE INTERNIH GRAFOVA
     for program_data in cobol_data:
-        pgm = program_data['program_id']
-        internal_file_path = os.path.join(internal_dir, f"internal_{safe_id(pgm)}.html")
-        _generate_internal_flow(program_data, internal_file_path)
-        logger.info(f"Interni graf generiran za {pgm}: {internal_file_path}")
+        _generate_internal_flow(program_data, internal_dir, template_env, internal_template_name, logger)
         
     # 2. Glavni JCL graf
     lines = ["graph TD"]
@@ -90,7 +97,7 @@ def pokreni_generator_grafa(jcl_json, cobol_json, html_output_main, html_output_
                 extra = ""
                 if pgm in cobol_map:
                     cnt = len(cobol_map[pgm]['copybooks'])
-                    # DODANA LOGIKA: Linkanje na interni graf
+                    
                     internal_file_name = f"internal/internal_{safe_id(pgm)}.html"
                     extra = f'<br/>(Copybooks: {cnt})<br/>[[{internal_file_name} Interni Tok]]'
 
@@ -118,12 +125,12 @@ def pokreni_generator_grafa(jcl_json, cobol_json, html_output_main, html_output_
     
     mermaid_content = "\n".join(lines)
     
-    html = f"""
-    <!DOCTYPE html><html><head><script type='module'>import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';mermaid.initialize({{ startOnLoad: true, securityLevel: 'loose' }});</script></head><body style='background:#f4f4f9; font-family:sans-serif;'><h2>COBOL Flow</h2><div style='background:white; padding:20px; border-radius:8px;'><pre class='mermaid'>\n{mermaid_content}\n</pre></div></body></html>
-    """
+    # Koristi Jinja2 za renderiranje glavnog grafa
+    template = template_env.get_template(main_template_name)
+    html_content = template.render(mermaid_content=mermaid_content)
 
     with open(html_output_main, 'w', encoding='utf-8') as f:
-        f.write(html)
+        f.write(html_content)
     
     logger.info(f"Glavni graf generiran: {html_output_main}")
     logger.info("Generiranje grafova zavrseno.")

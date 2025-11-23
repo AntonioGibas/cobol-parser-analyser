@@ -18,3 +18,8 @@ filenames:
     cobol_json: analysis_results.json
     jcl_json: jcl_analysis.json
     main_graph: graph.html
+
+templates:
+    templates_dir: templates
+    main_graph: main_graph.html
+    internal_flow: internal_flow.html

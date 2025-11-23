@@ -31,12 +31,15 @@ def setup_custom_logger(name, session_dir, script_name):
     return logger
 
 def main():
-    config = load_yaml_config(CONFIG_FILE) # Pozivamo servis
+    config = load_yaml_config(CONFIG_FILE) 
 
-    # IZDVAJANJE PUTANJA IZ KONFIGURACIJE
     LOG_ROOT = config['paths']['log_root']
     METADATA_ROOT = config['paths']['metadata_root']
     OUTPUT_ROOT = config['paths']['output_root']
+
+    TEMPLATES_DIR = config['templates']['templates_dir']
+    MAIN_TEMPLATE = config['templates']['main_graph']
+    INTERNAL_TEMPLATE = config['templates']['internal_flow']
     
     SOURCE_DIR = config['paths']['source_dir']
     JCL_DIR = config['paths']['jcl_dir']
@@ -72,7 +75,7 @@ def main():
     pokreni_jcl_parser(JCL_DIR, JCL_JSON, logger_jcl)
 
     logger_graph = setup_custom_logger('graph_logger', LOG_SESSION_DIR, 'graph_generator')
-    pokreni_generator_grafa(JCL_JSON, COBOL_JSON, GRAPH_HTML, INTERNAL_GRAPH_DIR, logger_graph)
+    pokreni_generator_grafa(JCL_JSON, COBOL_JSON, GRAPH_HTML, INTERNAL_GRAPH_DIR, TEMPLATES_DIR, MAIN_TEMPLATE, INTERNAL_TEMPLATE, logger_graph)
 
     print("\n--- CIKLUS ZAVRSEN ---")
 
