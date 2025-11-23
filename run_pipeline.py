@@ -16,6 +16,7 @@ JCL_DIR = os.path.join("base", "JCL")
 COBOL_JSON = os.path.join(METADATA_DIR, "COBOL", "analysis_results.json")
 JCL_JSON = os.path.join(METADATA_DIR, "JCL", "jcl_analysis.json")
 GRAPH_HTML = os.path.join(OUTPUT_DIR, "graph.html")
+INTERNAL_GRAPH_DIR = os.path.join(OUTPUT_DIR) 
 
 def setup_custom_logger(name, session_dir, script_name):
     filename = f"log_{script_name}.txt"
@@ -58,7 +59,7 @@ def main():
     pokreni_jcl_parser(JCL_DIR, JCL_JSON, logger_jcl)
 
     logger_graph = setup_custom_logger('graph_logger', LOG_SESSION_DIR, 'graph_generator')
-    pokreni_generator_grafa(JCL_JSON, COBOL_JSON, GRAPH_HTML, logger_graph)
+    pokreni_generator_grafa(JCL_JSON, COBOL_JSON, GRAPH_HTML, INTERNAL_GRAPH_DIR, logger_graph)
 
     print("\n--- CIKLUS ZAVRSEN ---")
 
