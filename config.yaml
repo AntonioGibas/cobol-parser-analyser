@@ -1,0 +1,20 @@
+paths:
+    # Ulazni direktoriji (prema bazi)
+    source_dir: base/source
+    jcl_dir: base/JCL
+    
+    # Glavni output direktoriji
+    log_root: execution_logs
+    metadata_root: metadata
+    output_root: output
+
+structure:
+    # Unutarnja organizacija metapodataka
+    cobol_metadata_dir: COBOL
+    jcl_metadata_dir: JCL
+    
+# Nazivi kljucnih izlaznih datoteka
+filenames:
+    cobol_json: analysis_results.json
+    jcl_json: jcl_analysis.json
+    main_graph: graph.html

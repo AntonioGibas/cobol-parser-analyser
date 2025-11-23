@@ -2,23 +2,21 @@ import os
 import logging
 import datetime
 import sys
+import yaml # Novo!
+
 from src.cobol_parser import pokreni_cobol_parser
 from src.parse_jcl import pokreni_jcl_parser
 from src.generate_graph import pokreni_generator_grafa
 
-BASE_LOG_DIR = "execution_logs"
-METADATA_DIR = "metadata"
-OUTPUT_DIR = "output"
+CONFIG_FILE = "config.yaml"
 
-SOURCE_DIR = os.path.join("base", "source")
-JCL_DIR = os.path.join("base", "JCL")
-
-COBOL_JSON = os.path.join(METADATA_DIR, "COBOL", "analysis_results.json")
-JCL_JSON = os.path.join(METADATA_DIR, "JCL", "jcl_analysis.json")
-GRAPH_HTML = os.path.join(OUTPUT_DIR, "graph.html")
-INTERNAL_GRAPH_DIR = os.path.join(OUTPUT_DIR) 
+def load_config():
+    with open(CONFIG_FILE, 'r') as f:
+        config = yaml.safe_load(f)
+    return config
 
 def setup_custom_logger(name, session_dir, script_name):
+    log_dir = session_dir
     filename = f"log_{script_name}.txt"
     filepath = os.path.join(session_dir, filename)
     
@@ -38,20 +36,40 @@ def setup_custom_logger(name, session_dir, script_name):
     return logger
 
 def main():
-    # Kreiranje esencijalnih foldera
-    if not os.path.exists(OUTPUT_DIR): os.makedirs(OUTPUT_DIR)
-    if not os.path.exists(os.path.join(METADATA_DIR, "COBOL")): os.makedirs(os.path.join(METADATA_DIR, "COBOL"))
-    if not os.path.exists(os.path.join(METADATA_DIR, "JCL")): os.makedirs(os.path.join(METADATA_DIR, "JCL"))
+    config = load_config()
 
-    # Kreiranje jedinstvenog foldera za ovu sesiju logiranja
+    # IZDVAJANJE PUTANJA IZ KONFIGURACIJE
+    LOG_ROOT = config['paths']['log_root']
+    METADATA_ROOT = config['paths']['metadata_root']
+    OUTPUT_ROOT = config['paths']['output_root']
+    
+    SOURCE_DIR = config['paths']['source_dir']
+    JCL_DIR = config['paths']['jcl_dir']
+    
+    COBOL_META_DIR = config['structure']['cobol_metadata_dir']
+    JCL_META_DIR = config['structure']['jcl_metadata_dir']
+
+    # KREIRANJE FINALNIH PUTANJA
+    COBOL_JSON = os.path.join(METADATA_ROOT, COBOL_META_DIR, config['filenames']['cobol_json'])
+    JCL_JSON = os.path.join(METADATA_ROOT, JCL_META_DIR, config['filenames']['jcl_json'])
+    GRAPH_HTML = os.path.join(OUTPUT_ROOT, config['filenames']['main_graph'])
+    INTERNAL_GRAPH_DIR = OUTPUT_ROOT
+
+    # 1. Osiguravanje mapa
+    if not os.path.exists(OUTPUT_ROOT): os.makedirs(OUTPUT_ROOT)
+    if not os.path.exists(os.path.join(METADATA_ROOT, COBOL_META_DIR)): os.makedirs(os.path.join(METADATA_ROOT, COBOL_META_DIR))
+    if not os.path.exists(os.path.join(METADATA_ROOT, JCL_META_DIR)): os.makedirs(os.path.join(METADATA_ROOT, JCL_META_DIR))
+
+    # 2. Setup log sesije
     now = datetime.datetime.now()
     timestamp_filename = now.strftime("%d-%m-%Y_%H-%M-%S")
     LOG_SESSION_FOLDER = f"log_{timestamp_filename}"
-    LOG_SESSION_DIR = os.path.join(BASE_LOG_DIR, LOG_SESSION_FOLDER)
+    LOG_SESSION_DIR = os.path.join(LOG_ROOT, LOG_SESSION_FOLDER)
     os.makedirs(LOG_SESSION_DIR)
 
     print(f"--- POKRETANJE PIPELINE-A: {timestamp_filename} ---")
 
+    # 3. Pozivi modula
     logger_cobol = setup_custom_logger('cobol_logger', LOG_SESSION_DIR, 'cobol_parser')
     pokreni_cobol_parser(SOURCE_DIR, COBOL_JSON, logger_cobol)
 
