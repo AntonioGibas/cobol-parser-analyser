@@ -2,6 +2,7 @@ import os
 import json
 import logging
 from src.config.regex_patterns import COBOL_PATTERNS, IGNORED_PERFORMS
+from src.services.data_io import write_json
 
 class CobolParser:
     def __init__(self, logger=None):
@@ -77,7 +78,6 @@ def pokreni_cobol_parser(source_dir, output_file, logger):
             except Exception as e:
                 logger.error(f"[{filename}] KRITICNA GRESKA: {str(e)}")
     
-    with open(output_file, 'w', encoding='utf-8') as f:
-        json.dump(svi_podaci, f, indent=4)
+    write_json(svi_podaci, output_file)
 
     logger.info(f"COBOL analiza zavrsena. Rezultati: {output_file}")

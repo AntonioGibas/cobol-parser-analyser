@@ -1,11 +1,7 @@
 import json
 import os
 import re
-
-def ucitaj_json(putanja):
-    if os.path.exists(putanja):
-        with open(putanja, 'r', encoding='utf-8') as f: return json.load(f)
-    return []
+from src.services.data_io import read_json
 
 def safe_id(text):
     if not text: return "UNKNOWN"
@@ -50,8 +46,8 @@ def _generate_internal_flow(program_data, output_path):
 def pokreni_generator_grafa(jcl_json, cobol_json, html_output_main, html_output_internal_dir, logger):
     logger.info("--- POCETAK GENERIRANJA GRAFA ---")
     
-    jcl_data = ucitaj_json(jcl_json)
-    cobol_data = ucitaj_json(cobol_json)
+    jcl_data = read_json(jcl_json)
+    cobol_data = read_json(cobol_json)
     
     if not jcl_data:
         logger.error("GRESKA: Nema JCL podataka.")

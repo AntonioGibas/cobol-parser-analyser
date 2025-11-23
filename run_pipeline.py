@@ -2,23 +2,18 @@ import os
 import logging
 import datetime
 import sys
-import yaml # Novo!
 
 from src.cobol_parser import pokreni_cobol_parser
 from src.parse_jcl import pokreni_jcl_parser
 from src.generate_graph import pokreni_generator_grafa
+from src.services.data_io import load_yaml_config # Novo!
 
 CONFIG_FILE = "config.yaml"
-
-def load_config():
-    with open(CONFIG_FILE, 'r') as f:
-        config = yaml.safe_load(f)
-    return config
 
 def setup_custom_logger(name, session_dir, script_name):
     log_dir = session_dir
     filename = f"log_{script_name}.txt"
-    filepath = os.path.join(session_dir, filename)
+    filepath = os.path.join(log_dir, filename)
     
     formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s', datefmt='%d-%m-%Y %H:%M:%S')
     
@@ -36,7 +31,7 @@ def setup_custom_logger(name, session_dir, script_name):
     return logger
 
 def main():
-    config = load_config()
+    config = load_yaml_config(CONFIG_FILE) # Pozivamo servis
 
     # IZDVAJANJE PUTANJA IZ KONFIGURACIJE
     LOG_ROOT = config['paths']['log_root']

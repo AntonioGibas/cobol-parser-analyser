@@ -1,6 +1,7 @@
 import os
 import re
 import json
+from src.services.data_io import write_json
 
 def parsiraj_jcl_sadrzaj(sadrzaj, filename):
     lines = sadrzaj.splitlines()
@@ -115,6 +116,6 @@ def pokreni_jcl_parser(jcl_dir, output_file, logger):
             except Exception as e:
                 logger.error(f"[{filename}] GRESKA: {str(e)}")
 
-    with open(output_file, 'w', encoding='utf-8') as f:
-        json.dump(svi_jcl_podaci, f, indent=4)
+    write_json(svi_jcl_podaci, output_file)
+    
     logger.info(f"JCL analiza zavrsena. Rezultati: {output_file}")
