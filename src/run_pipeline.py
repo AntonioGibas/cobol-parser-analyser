@@ -9,10 +9,12 @@ from src.generate_graph import pokreni_generator_grafa
 BASE_LOG_DIR = "execution_logs"
 SOURCE_DIR = os.path.join("base", "source")
 JCL_DIR = os.path.join("base", "JCL")
+
+METADATA_DIR = "metadata"
 OUTPUT_DIR = "output"
 
-COBOL_JSON = os.path.join(OUTPUT_DIR, "analysis_results.json")
-JCL_JSON = os.path.join(OUTPUT_DIR, "jcl_analysis.json")
+COBOL_JSON = os.path.join(METADATA_DIR, "COBOL", "analysis_results.json")
+JCL_JSON = os.path.join(METADATA_DIR, "JCL", "jcl_analysis.json")
 GRAPH_HTML = os.path.join(OUTPUT_DIR, "graph.html")
 
 def setup_custom_logger(name, folder, script_name, timestamp):
@@ -36,9 +38,6 @@ def setup_custom_logger(name, folder, script_name, timestamp):
     return logger
 
 def main():
-    if not os.path.exists(OUTPUT_DIR):
-        os.makedirs(OUTPUT_DIR)
-
     now = datetime.datetime.now()
     timestamp_filename = now.strftime("%d-%m-%Y_%H-%M-%S")
     
