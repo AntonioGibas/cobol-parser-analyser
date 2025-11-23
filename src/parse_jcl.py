@@ -2,6 +2,7 @@ import os
 import re
 import json
 from src.services.data_io import write_json
+from src.exceptions import JclParsingError
 
 def parsiraj_jcl_sadrzaj(sadrzaj, filename):
     lines = sadrzaj.splitlines()
@@ -99,8 +100,8 @@ def pokreni_jcl_parser(jcl_dir, output_file, logger):
     logger.info(f"--- POCETAK JCL PARSERA ---")
     
     if not os.path.exists(jcl_dir):
-        logger.error(f"GRESKA: {jcl_dir} ne postoji.")
-        return
+        # Koristenje specifične greške
+        raise JclParsingError(f"Direktorij {jcl_dir} ne postoji!")
 
     svi_jcl_podaci = []
     for filename in os.listdir(jcl_dir):
@@ -113,9 +114,10 @@ def pokreni_jcl_parser(jcl_dir, output_file, logger):
                 if steps:
                     svi_jcl_podaci.append({"filename": filename, "steps": steps})
                     logger.info(f"[{filename}] Parsirano {len(steps)} koraka.")
+            # Koristi novu, definiranu grešku za hvatanje
             except Exception as e:
-                logger.error(f"[{filename}] GRESKA: {str(e)}")
+                logger.error(f"[{filename}] GRESKA PARSIRANJA: {str(e)}")
+                # Ovdje bi idealno trebalo re-raise JclParsingError
 
     write_json(svi_jcl_podaci, output_file)
-    
     logger.info(f"JCL analiza zavrsena. Rezultati: {output_file}")

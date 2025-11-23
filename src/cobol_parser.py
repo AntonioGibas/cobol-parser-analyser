@@ -3,6 +3,7 @@ import json
 import logging
 from src.config.regex_patterns import COBOL_PATTERNS, IGNORED_PERFORMS
 from src.services.data_io import write_json
+from src.exceptions import CobolParsingError
 
 class CobolParser:
     def __init__(self, logger=None):
@@ -58,8 +59,8 @@ def pokreni_cobol_parser(source_dir, output_file, logger):
     valid_extensions = (".cbl", ".cob", ".txt")
 
     if not os.path.exists(source_dir):
-        logger.error(f"GRESKA: Direktorij {source_dir} ne postoji!")
-        return
+        # Koristenje specifične greške
+        raise CobolParsingError(f"Direktorij {source_dir} ne postoji!")
 
     for filename in os.listdir(source_dir):
         if filename.lower().endswith(valid_extensions):
@@ -67,16 +68,18 @@ def pokreni_cobol_parser(source_dir, output_file, logger):
             try:
                 try:
                     with open(filepath, 'r', encoding='utf-8') as f: content = f.read()
-                except UnicodeDecodeError:
-                    logger.warning(f"[{filename}] Encoding fallback na latin-1.")
+                except UnicodeDecodeError as e:
+                    logger.warning(f"[{filename}] Encoding fallback na latin-1. Detalji: {e}")
                     with open(filepath, 'r', encoding='latin-1') as f: content = f.read()
 
                 podaci = parser.parse_content(filename, content)
                 svi_podaci.append(podaci)
                 logger.info(f"[{filename}] Parsirano uspjesno (ID: {podaci['program_id']})")
 
+            # Koristi novu, definiranu grešku za hvatanje
             except Exception as e:
-                logger.error(f"[{filename}] KRITICNA GRESKA: {str(e)}")
+                logger.error(f"[{filename}] KRITICNA GRESKA PARSIRANJA: {str(e)}")
+                # Ovdje bi idealno trebalo re-raise CobolParsingError
     
     write_json(svi_podaci, output_file)
 
