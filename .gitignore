@@ -5,3 +5,4 @@ venv/
 output/
 execution_logs/
 metadata/
+zapp.yaml
