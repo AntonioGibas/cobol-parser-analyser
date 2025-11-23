@@ -7,23 +7,19 @@ from src.parse_jcl import pokreni_jcl_parser
 from src.generate_graph import pokreni_generator_grafa
 
 BASE_LOG_DIR = "execution_logs"
-SOURCE_DIR = os.path.join("base", "source")
-JCL_DIR = os.path.join("base", "JCL")
-
 METADATA_DIR = "metadata"
 OUTPUT_DIR = "output"
+
+SOURCE_DIR = os.path.join("base", "source")
+JCL_DIR = os.path.join("base", "JCL")
 
 COBOL_JSON = os.path.join(METADATA_DIR, "COBOL", "analysis_results.json")
 JCL_JSON = os.path.join(METADATA_DIR, "JCL", "jcl_analysis.json")
 GRAPH_HTML = os.path.join(OUTPUT_DIR, "graph.html")
 
-def setup_custom_logger(name, folder, script_name, timestamp):
-    log_dir = os.path.join(BASE_LOG_DIR, folder)
-    if not os.path.exists(log_dir):
-        os.makedirs(log_dir)
-        
-    filename = f"log_{script_name}_{timestamp}.txt"
-    filepath = os.path.join(log_dir, filename)
+def setup_custom_logger(name, session_dir, script_name):
+    filename = f"log_{script_name}.txt"
+    filepath = os.path.join(session_dir, filename)
     
     formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s', datefmt='%d-%m-%Y %H:%M:%S')
     
@@ -41,26 +37,27 @@ def setup_custom_logger(name, folder, script_name, timestamp):
     return logger
 
 def main():
-    # FIX: Osiguraj da svi potrebni direktoriji postoje (metadata, output)
-    if not os.path.exists(OUTPUT_DIR):
-        os.makedirs(OUTPUT_DIR)
-    if not os.path.exists(os.path.join(METADATA_DIR, "COBOL")):
-        os.makedirs(os.path.join(METADATA_DIR, "COBOL"))
-    if not os.path.exists(os.path.join(METADATA_DIR, "JCL")):
-        os.makedirs(os.path.join(METADATA_DIR, "JCL"))
+    # Kreiranje esencijalnih foldera
+    if not os.path.exists(OUTPUT_DIR): os.makedirs(OUTPUT_DIR)
+    if not os.path.exists(os.path.join(METADATA_DIR, "COBOL")): os.makedirs(os.path.join(METADATA_DIR, "COBOL"))
+    if not os.path.exists(os.path.join(METADATA_DIR, "JCL")): os.makedirs(os.path.join(METADATA_DIR, "JCL"))
 
+    # Kreiranje jedinstvenog foldera za ovu sesiju logiranja
     now = datetime.datetime.now()
     timestamp_filename = now.strftime("%d-%m-%Y_%H-%M-%S")
-    
+    LOG_SESSION_FOLDER = f"log_{timestamp_filename}"
+    LOG_SESSION_DIR = os.path.join(BASE_LOG_DIR, LOG_SESSION_FOLDER)
+    os.makedirs(LOG_SESSION_DIR)
+
     print(f"--- POKRETANJE PIPELINE-A: {timestamp_filename} ---")
 
-    logger_cobol = setup_custom_logger('cobol_logger', 'COBOL', 'cobol_parser', timestamp_filename)
+    logger_cobol = setup_custom_logger('cobol_logger', LOG_SESSION_DIR, 'cobol_parser')
     pokreni_cobol_parser(SOURCE_DIR, COBOL_JSON, logger_cobol)
 
-    logger_jcl = setup_custom_logger('jcl_logger', 'JCL', 'jcl_parser', timestamp_filename)
+    logger_jcl = setup_custom_logger('jcl_logger', LOG_SESSION_DIR, 'jcl_parser')
     pokreni_jcl_parser(JCL_DIR, JCL_JSON, logger_jcl)
 
-    logger_graph = setup_custom_logger('graph_logger', 'graph', 'graph_generator', timestamp_filename)
+    logger_graph = setup_custom_logger('graph_logger', LOG_SESSION_DIR, 'graph_generator')
     pokreni_generator_grafa(JCL_JSON, COBOL_JSON, GRAPH_HTML, logger_graph)
 
     print("\n--- CIKLUS ZAVRSEN ---")
