@@ -6,7 +6,7 @@ import sys
 from src.cobol_parser import pokreni_cobol_parser
 from src.parse_jcl import pokreni_jcl_parser
 from src.generate_graph import pokreni_generator_grafa
-from src.services.data_io import load_yaml_config # Novo!
+from src.services.data_io import load_yaml_config
 
 CONFIG_FILE = "config.yaml"
 
